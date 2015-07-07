@@ -65,6 +65,9 @@ yo file <path/to/file_name>
 
 ## History
 
+- 0.1.4
+     - fix output issue
+     - add config.json / defining types
 - 0.1.2
     - HTML, JS, PHP templates
 

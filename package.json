@@ -1,6 +1,6 @@
 {
   "name": "generator-file",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Unique file boilerplate (html/php/js)",
   "license": "MIT",
   "main": "app/index.js",
