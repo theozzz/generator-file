@@ -1,30 +1,35 @@
 {
     "name": "generator-file",
-    "version": "0.0.0",
-    "description": "Yeoman generator",
+    "version": "0.1.0",
+    "description": "Unique file boilerplate (html/php/js)",
     "license": "MIT",
     "main": "app/index.js",
     "repository": "sixertoy/generator-file",
     "author": {
         "name": "Matthieu Lassalvy",
-        "email": "m.lassalvy@gmail.com",
+        "email": "sixertoy.github@gmail.com",
         "url": "https://github.com/sixertoy"
     },
     "scripts": {
-        "test": "mocha"
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "files": [
     "generators"
   ],
     "keywords": [
-    "yeoman-generator"
+        "js",
+        "php",
+        "file",
+        "html",
+        "index",
+        "simple",
+        "commonjs",
+        "javascript",
+        "yeoman-generator"
   ],
     "dependencies": {
         "yeoman-generator": "^0.19.0",
         "chalk": "^1.0.0",
         "yosay": "^1.0.2"
-    },
-    "devDependencies": {
-        "mocha": "*"
     }
 }

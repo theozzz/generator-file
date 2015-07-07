@@ -1,57 +1,68 @@
-'use strict';
-var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-var yosay = require('yosay');
+/*jslint indent: 4, nomen: true */
+/*globals require, module, process */
+(function () {
+    'use strict';
+    var yeoman = require('yeoman-generator'),
+        chalk = require('chalk'),
+        yosay = require('yosay'),
+        path = require('path');
 
-module.exports = yeoman.generators.Base.extend({
-  prompting: function () {
-    var done = this.async();
+    module.exports = yeoman.generators.Base.extend({
 
-    // Have Yeoman greet the user.
-    this.log(yosay(
-      'Welcome to the premium ' + chalk.red('File') + ' generator!'
-    ));
+        constructor: function () {
+            try {
+                yeoman.generators.Base.apply(this, arguments);
+                // file argument is required
+                this.argument('filename', {
+                    optional: false,
+                    required: true,
+                    type: String
+                });
+            } catch (e) {
+                this.filename = false;
+            }
 
-    var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
+        },
 
-    this.prompt(prompts, function (props) {
-      this.props = props;
-      // To access props later use this.props.someOption;
+        prompting: function () {
+            var done = this.async(),
+                prompts = [{
+                    // prompts for file type
+                    type: 'list',
+                    name: 'file_type',
+                    message: 'Wich File Type ?',
+                    choices: [
+                        'html',
+                        'js',
+                        'php'
+                    ]
+                }];
 
-      done();
-    }.bind(this));
-  },
+            if (this.filename) {
+                // normalize le path
+                this.filename = path.normalize(this.filename);
+                //
+                this.log(yosay(
+                    'Welcome to the premium ' + chalk.red('File') + ' generator!'
+                ));
+                this.prompt(prompts, function (props) {
+                    this.props = props;
+                    done();
+                }.bind(this));
 
-  writing: {
-    app: function () {
-      this.fs.copy(
-        this.templatePath('_package.json'),
-        this.destinationPath('package.json')
-      );
-      this.fs.copy(
-        this.templatePath('_bower.json'),
-        this.destinationPath('bower.json')
-      );
-    },
+            } else {
+                this.log.error(chalk.red('Filename argument is missing. Aborted!'));
+                done();
+                process.exit(1);
+            }
+        },
 
-    projectfiles: function () {
-      this.fs.copy(
-        this.templatePath('editorconfig'),
-        this.destinationPath('.editorconfig')
-      );
-      this.fs.copy(
-        this.templatePath('jshintrc'),
-        this.destinationPath('.jshintrc')
-      );
-    }
-  },
+        writing: function () {
+            this.fs.copy(
+                this.templatePath('templates/_' + this.props.file_type + '.tpl'),
+                this.destinationPath(this.filename + '.' + this.props.file_type)
+            );
+        }
 
-  install: function () {
-    this.installDependencies();
-  }
-});
+    });
+}());
