@@ -55,14 +55,19 @@ yo file <path/to/file_name>
 
 ```php
 <?php
-
 ```
 
-[license-img]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
-[license-url]: LICENSE-MIT
+## Contributing
+
+- Add new type in generators/app/config.json
+- Add template file as <type>.tpl in generators/app/templates
+
 
 ## History
 
 - 0.1.2
-    - HTML, JS, PHP templates added
+    - HTML, JS, PHP templates
+
+[license-img]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
+[license-url]: LICENSE-MIT
 

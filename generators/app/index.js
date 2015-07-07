@@ -1,5 +1,5 @@
 /*jslint indent: 4, nomen: true */
-/*globals require, module, process */
+/*globals require, module, process, __dirname */
 (function () {
     'use strict';
     var yeoman = require('yeoman-generator'),
@@ -25,18 +25,18 @@
         },
 
         prompting: function () {
-            var done = this.async(),
-                prompts = [{
-                    // prompts for file type
-                    type: 'list',
-                    name: 'file_type',
-                    message: 'Wich File Type ?',
-                    choices: [
-                        'html',
-                        'js',
-                        'php'
-                    ]
-                }];
+            var prompts,
+                done = this.async(),
+                config = this.fs.read(path.join(__dirname, 'config.json'), 'utf8');
+            config = JSON.parse(config);
+
+            prompts = [{
+                // prompts for file type
+                type: 'list',
+                name: 'file_type',
+                message: 'Wich File Type ?',
+                choices: config.types
+            }];
 
             if (this.filename) {
                 // normalize le path
@@ -59,7 +59,7 @@
 
         writing: function () {
             this.fs.copy(
-                this.templatePath('templates/_' + this.props.file_type + '.tpl'),
+                this.templatePath('_' + this.props.file_type + '.tpl'),
                 this.destinationPath(this.filename + '.' + this.props.file_type)
             );
         }
