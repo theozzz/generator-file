@@ -61,3 +61,8 @@ yo file <path/to/file_name>
 [license-img]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
 [license-url]: LICENSE-MIT
 
+## History
+
+- 0.1.2
+    - HTML, JS, PHP templates added
+
